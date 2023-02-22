@@ -17,7 +17,6 @@ app.use(
         credentials: true,
     })
 );
-console.log(process.env.CORS_URL, process.env.CORS_URL1, process.env.CORS_URL2);
 app.use(express.json());
 app.use(express.urlencoded());
 app.use("/images", express.static("images"));

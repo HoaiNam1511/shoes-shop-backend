@@ -155,7 +155,7 @@ const getAllProduct = async (req, res) => {
 const filterProduct = async (req, res) => {
     const { limit, offset } = req.query;
     try {
-        const product = await Product.findAll({
+        const product = await Product.findAndCountAll({
             where: {
                 [Op.and]: {
                     fk_category_status_id: {
@@ -200,8 +200,8 @@ const filterProduct = async (req, res) => {
             limit: +limit || 8,
         });
 
-        const productCategory = await filterCategoryTitle(product);
-        res.send(productCategory);
+        const productCategory = await filterCategoryTitle(product.rows);
+        res.send({ productRow: productCategory, total: product.count });
     } catch (error) {
         console.log(error);
     }
