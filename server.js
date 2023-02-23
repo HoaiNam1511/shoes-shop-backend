@@ -10,7 +10,7 @@ app.use(
     cors({
         origin: [
             "https://ananas-shoe-shop.vercel.app",
-            "http://localhost:3000",
+            "https://shoes-shop-admin-ten.vercel.app",
             process.env.CORS_URL1,
             process.env.CORS_URL2,
         ],
