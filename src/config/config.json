@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "u3sf2cvjbiergoun",
-    "password": "eaFDpHobTbGF95OeH105",
-    "database": "bwtoqmzgexrvhjabebam",
-    "host": "bwtoqmzgexrvhjabebam-mysql.services.clever-cloud.com",
+    "username": "root",
+    "password": null,
+    "database": "shoes_shop",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
@@ -21,3 +21,4 @@
     "dialect": "mysql"
   }
 }
+
