@@ -1,6 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { User, User_role, Role } = require("../models/users");
+const { User, Role } = require("../models/users");
 
 const secretKey = process.env.ACCESS_TOKEN_KEY;
 const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
@@ -30,6 +30,7 @@ const generateRefreshToken = (user) => {
 
 const login = async (req, res, next) => {
     const { userName, password } = req.body;
+    console.log("come login");
     let message, accessToken, refreshToken, action;
     try {
         const user = await User.findOne({
@@ -52,6 +53,7 @@ const login = async (req, res, next) => {
             if (user.status == 1) {
                 accessToken = generateAccessToken(infoCookies);
                 refreshToken = generateRefreshToken(infoCookies);
+
                 //Save token in array -> should save in database
                 refreshTokenArr.push(refreshToken);
                 //Save token to cookies
@@ -88,6 +90,7 @@ const login = async (req, res, next) => {
 
 const refreshToken = (req, res) => {
     // Get refresh token from cookies
+    console.log("come refresh");
     let refreshToken = req.cookies.refreshToken;
     if (!refreshToken) return res.send("You are not authenticated");
     //Check refresh token

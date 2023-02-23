@@ -116,7 +116,7 @@ const updateUser = async (req, res, next) => {
             //If user login are 'admin'
             if (auth === "admin") {
                 //If user update not change name and status
-                if (userupdate === useName && status === "1") {
+                if (userupdate === useName && +status === 1) {
                     await User.update(
                         {
                             email: email,
