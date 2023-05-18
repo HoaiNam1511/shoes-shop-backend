@@ -14,7 +14,7 @@ const generateAccessToken = (user) => {
             role: user.role,
         },
         secretKey,
-        { expiresIn: "60s" }
+        { expiresIn: "180s" }
     );
 };
 const generateRefreshToken = (user) => {
@@ -90,7 +90,6 @@ const login = async (req, res, next) => {
 
 const refreshToken = (req, res) => {
     // Get refresh token from cookies
-    console.log("come refresh");
     let refreshToken = req.cookies.refreshToken;
     if (!refreshToken) return res.send("You are not authenticated");
     //Check refresh token
@@ -101,19 +100,19 @@ const refreshToken = (req, res) => {
         if (err) {
             console.log(err);
         }
-        refreshTokenArr = refreshTokenArr.filter(
-            (token) => token !== refreshToken
-        );
+        // refreshTokenArr = refreshTokenArr.filter(
+        //     (token) => token !== refreshToken
+        // );
         let newAccessToken = generateAccessToken(user);
-        let newRefreshToken = generateRefreshToken(user);
-        refreshTokenArr.push(newRefreshToken);
-        res.cookie("refreshToken", newRefreshToken, {
-            httpOnly: true,
-            //When deploy change: true
-            secure: false,
-            path: "/",
-            sameSite: "strict",
-        });
+        //let newRefreshToken = generateRefreshToken(user);
+        // refreshTokenArr.push(newRefreshToken);
+        // res.cookie("refreshToken", newRefreshToken, {
+        //     httpOnly: true,
+        //     //When deploy change: true
+        //     secure: false,
+        //     path: "/",
+        //     sameSite: "strict",
+        // });
         res.send({
             token: newAccessToken,
         });
